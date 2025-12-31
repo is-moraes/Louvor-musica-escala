@@ -17,21 +17,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #ffffff;
-      background: #fcfcfc;
-      background-image: url("https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
     }
 
     .overlay {
       position: fixed;
       inset: 0;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 60%),
-                  linear-gradient(to bottom, rgba(245, 245, 247, 0.9), rgba(15,23,42,0.75));
-      backdrop-filter: blur(3px);
       z-index: 0;
+      transition: background 0.2s ease, backdrop-filter 0.2s ease;
     }
 
     .container {
@@ -48,16 +40,14 @@
     @media (max-width: 900px) {
       .container {
         grid-template-columns: 1fr;
+        padding: 16px;
       }
     }
 
     .card {
-      background: rgba(219, 221, 224, 0.65);
       border-radius: 16px;
-      border: 1px solid rgba(204, 200, 200, 0.12);
-      box-shadow: 0 24px 60px rgba(15,23,42,0.7);
-      backdrop-filter: blur(10px);
       padding: 20px 22px;
+      transition: background 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
     }
 
     .card-header {
@@ -68,17 +58,22 @@
       gap: 10px;
     }
 
+    @media (max-width: 600px) {
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
     .card-title {
       font-size: 1.1rem;
       font-weight: 600;
       letter-spacing: 0.03em;
       text-transform: uppercase;
-      color: #06558a;
     }
 
     .card-subtitle {
       font-size: 0.8rem;
-      color: #252629;
       text-transform: uppercase;
       letter-spacing: 0.12em;
     }
@@ -90,7 +85,6 @@
 
     .subtitle {
       font-size: 0.95rem;
-      color: #232427;
       margin-bottom: 16px;
     }
 
@@ -105,9 +99,6 @@
       font-size: 0.8rem;
       padding: 6px 10px;
       border-radius: 999px;
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(148,163,184,0.5);
-      color: #e5e7eb;
     }
 
     table {
@@ -126,29 +117,18 @@
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      color: #9ca3af;
-      border-bottom: 1px solid rgba(148,163,184,0.4);
-    }
-
-    tbody tr:nth-child(even) {
-      background: rgba(15,23,42,0.7);
-    }
-
-    tbody tr:nth-child(odd) {
-      background: rgba(15,23,42,0.4);
-    }
-
-    tbody tr:hover {
-      background: rgba(59,130,246,0.2);
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
     }
 
     td {
-      border-bottom: 1px solid rgba(15,23,42,0.8);
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
     }
 
     a {
-      color: #93c5fd;
       text-decoration: none;
+      font-weight: 500;
     }
 
     a:hover {
@@ -159,20 +139,17 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #111113;
       margin-top: 12px;
       margin-bottom: 4px;
     }
 
     .history-note {
       font-size: 0.72rem;
-      color: #9ca3af;
       margin-top: 4px;
     }
 
     .legend {
       font-size: 0.75rem;
-      color: #9ca3af;
       margin-top: 8px;
     }
 
@@ -186,24 +163,20 @@
       padding: 3px 8px;
       border-radius: 999px;
       font-size: 0.7rem;
-      border: 1px solid rgba(148,163,184,0.5);
-      color: #e5e7eb;
-      background: rgba(15,23,42,0.9);
     }
 
     .footer-note {
       margin-top: 12px;
       font-size: 0.75rem;
-      color: #1a5baf;
       text-align: right;
     }
 
-    /* CONTROLES DE SEMANA */
     .week-nav {
       display: flex;
       align-items: center;
       gap: 12px;
       margin-bottom: 4px;
+      flex-wrap: wrap;
     }
 
     .week-label {
@@ -211,7 +184,6 @@
       font-weight: 500;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #3c3e42;
     }
 
     .week-buttons {
@@ -223,54 +195,312 @@
       width: 32px;
       height: 32px;
       border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15, 32, 71, 0.9);
-      color: #e5e7eb;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 18px;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s;
-    }
-
-    .nav-btn:hover {
-      background: rgba(37,99,235,0.9);
-      box-shadow: 0 0 0 1px rgba(191,219,254,0.6);
-      transform: translateY(-1px);
-    }
-
-    .nav-btn:active {
-      transform: translateY(0);
-      box-shadow: none;
-    }
-
-    .badge-incidente { background: rgba(52,152,219,0.18); color: #4aa3ff; }
-    .badge-requisicao { background: rgba(46,204,113,0.18); color: #6de08d; }
-    .badge-outros { background: rgba(241,196,15,0.18); color: #f7d95a; }
-    .badge-problema { background: rgba(231,76,60,0.18); color: #ff826e; }
-
-    .insights-list {
-        margin-top: 10px;
-        font-size: 14px;
+      transition: background 0.15s, transform 0.1s, box-shadow 0.15s, border-color 0.15s;
     }
 
     .small-note {
       font-size: 0.75rem;
-      color: #4f5358;
       margin-top: 2px;
     }
 
     .month-tag {
       font-size: 0.8rem;
-      color: #4a4d52;
       text-transform: uppercase;
       letter-spacing: 0.14em;
     }
+
+    /* ---------- SELETOR DE TEMA ---------- */
+    .theme-switcher {
+      position: absolute;
+      top: 10px;
+      right: 16px;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.78rem;
+    }
+
+    .theme-switcher select {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      font-size: 0.78rem;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    /* ---------- TEMA CINZA (ORIGINAL) ---------- */
+    body.tema-cinza {
+      color: #ffffff;
+      background: #fcfcfc;
+      background-image: url("https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+
+    body.tema-cinza .overlay {
+      background: radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 60%),
+                  linear-gradient(to bottom, rgba(245, 245, 247, 0.9), rgba(15,23,42,0.75));
+      backdrop-filter: blur(3px);
+    }
+
+    body.tema-cinza .card {
+      background: rgba(219, 221, 224, 0.65);
+      border: 1px solid rgba(204, 200, 200, 0.12);
+      box-shadow: 0 24px 60px rgba(15,23,42,0.7);
+    }
+
+    body.tema-cinza .card-title {
+      color: #06558a;
+    }
+
+    body.tema-cinza .card-subtitle {
+      color: #252629;
+    }
+
+    body.tema-cinza h1 {
+      color: #ffffff;
+    }
+
+    body.tema-cinza .subtitle {
+      color: #232427;
+    }
+
+    body.tema-cinza .info-chip {
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #e5e7eb;
+    }
+
+    body.tema-cinza th {
+      color: #9ca3af;
+      border-bottom-color: rgba(148,163,184,0.4);
+    }
+
+    body.tema-cinza tbody tr:nth-child(even) {
+      background: rgba(15,23,42,0.7);
+    }
+
+    body.tema-cinza tbody tr:nth-child(odd) {
+      background: rgba(15,23,42,0.4);
+    }
+
+    body.tema-cinza tbody tr:hover {
+      background: rgba(59,130,246,0.2);
+    }
+
+    body.tema-cinza td {
+      border-bottom-color: rgba(15,23,42,0.8);
+    }
+
+    body.tema-cinza a {
+      color: #93c5fd;
+    }
+
+    body.tema-cinza a:hover {
+      text-decoration: underline;
+    }
+
+    body.tema-cinza .section-title {
+      color: #111113;
+    }
+
+    body.tema-cinza .history-note {
+      color: #9ca3af;
+    }
+
+    body.tema-cinza .legend {
+      color: #9ca3af;
+    }
+
+    body.tema-cinza .pill {
+      border: 1px solid rgba(148,163,184,0.5);
+      color: #e5e7eb;
+      background: rgba(15,23,42,0.9);
+    }
+
+    body.tema-cinza .footer-note {
+      color: #1a5baf;
+    }
+
+    body.tema-cinza .week-label {
+      color: #3c3e42;
+    }
+
+    body.tema-cinza .nav-btn {
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15, 32, 71, 0.9);
+      color: #e5e7eb;
+    }
+
+    body.tema-cinza .nav-btn:hover {
+      background: rgba(37,99,235,0.9);
+      box-shadow: 0 0 0 1px rgba(191,219,254,0.6);
+      transform: translateY(-1px);
+    }
+
+    body.tema-cinza .small-note {
+      color: #4f5358;
+    }
+
+    body.tema-cinza .month-tag {
+      color: #4a4d52;
+    }
+
+    /* ---------- TEMA BRANCO / LARANJA ---------- */
+    body.tema-laranja {
+      color: #111827;
+      background: #fdfdfb;
+    }
+
+    body.tema-laranja .overlay {
+      background:
+        radial-gradient(circle at top, rgba(251, 146, 60, 0.12), transparent 55%),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.96), rgba(249, 250, 251, 1));
+      backdrop-filter: blur(6px);
+    }
+
+    body.tema-laranja .card {
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    body.tema-laranja .card-title {
+      color: #111827;
+    }
+
+    body.tema-laranja .card-subtitle {
+      color: #6b7280;
+    }
+
+    body.tema-laranja h1 {
+      color: #111827;
+    }
+
+    body.tema-laranja .subtitle {
+      color: #6b7280;
+    }
+
+    body.tema-laranja .info-chip {
+      background: #fff7ed;
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+    }
+
+    body.tema-laranja th {
+      color: #9ca3af;
+      border-bottom-color: #e5e7eb;
+      background: #f9fafb;
+    }
+
+    body.tema-laranja tbody tr:nth-child(even) {
+      background: #f9fafb;
+    }
+
+    body.tema-laranja tbody tr:nth-child(odd) {
+      background: #ffffff;
+    }
+
+    body.tema-laranja tbody tr:hover {
+      background: #fff7ed;
+    }
+
+    body.tema-laranja td {
+      border-bottom-color: #f3f4f6;
+      color: #374151;
+    }
+
+    body.tema-laranja a {
+      color: #f97316;
+    }
+
+    body.tema-laranja a:hover {
+      color: #ea580c;
+    }
+
+    body.tema-laranja .section-title {
+      color: #6b7280;
+    }
+
+    body.tema-laranja .history-note {
+      color: #9ca3af;
+    }
+
+    body.tema-laranja .legend {
+      color: #9ca3af;
+    }
+
+    body.tema-laranja .pill {
+      border: 1px solid #fed7aa;
+      color: #9a3412;
+      background: #fff7ed;
+    }
+
+    body.tema-laranja .footer-note {
+      color: #9a3412;
+    }
+
+    body.tema-laranja .week-label {
+      color: #6b7280;
+    }
+
+    body.tema-laranja .nav-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid #fed7aa;
+      background: linear-gradient(to bottom, #f97316, #ea580c);
+      color: #ffffff;
+      box-shadow: 0 8px 18px rgba(249, 115, 22, 0.35);
+    }
+
+    body.tema-laranja .nav-btn:hover {
+      background: linear-gradient(to bottom, #fb923c, #f97316);
+      box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.8), 0 10px 22px rgba(249, 115, 22, 0.45);
+      transform: translateY(-1px);
+      border-color: #fdba74;
+    }
+
+    body.tema-laranja .nav-btn:active {
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
+    }
+
+    body.tema-laranja .small-note {
+      color: #9ca3af;
+    }
+
+    body.tema-laranja .month-tag {
+      color: #9a3412;
+      padding: 3px 9px;
+      border-radius: 999px;
+      border: 1px solid #fed7aa;
+      background: #fffbeb;
+      display: inline-block;
+      margin-top: 4px;
+    }
   </style>
 </head>
-<body>
+<body class="tema-cinza">
   <div class="overlay"></div>
+
+  <!-- Seletor de tema -->
+  <div class="theme-switcher">
+    <span>Tema:</span>
+    <select id="themeSelect">
+      <option value="tema-cinza">Cinza</option>
+      <option value="tema-laranja">Branco / Laranja</option>
+    </select>
+  </div>
 
   <main class="container">
     <!-- ESQUERDA: REPERTÓRIO -->
@@ -284,7 +514,6 @@
         <div>
           <div class="week-nav">
             <div class="week-buttons">
-              <!-- trocado para classes -->
               <button class="nav-btn btn-prev-week" title="Semana anterior">&#x25C0;</button>
               <button class="nav-btn btn-next-week" title="Próxima semana">&#x25B6;</button>
             </div>
@@ -314,9 +543,7 @@
             <th>Sequência</th>
           </tr>
         </thead>
-        <tbody id="tbodyMusicas">
-          <!-- preenchido via JS -->
-        </tbody>
+        <tbody id="tbodyMusicas"></tbody>
       </table>
 
       <div class="section-title">Versões de Referência (YouTube)</div>
@@ -329,9 +556,7 @@
             <th>Versão</th>
           </tr>
         </thead>
-        <tbody id="tbodyLinks">
-          <!-- preenchido via JS -->
-        </tbody>
+        <tbody id="tbodyLinks"></tbody>
       </table>
 
       <div class="footer-note">
@@ -360,9 +585,7 @@
             <th>Nome</th>
           </tr>
         </thead>
-        <tbody id="tbodyVozes">
-          <!-- preenchido via JS -->
-        </tbody>
+        <tbody id="tbodyVozes"></tbody>
       </table>
 
       <div class="section-title">Instrumentos</div>
@@ -373,9 +596,7 @@
             <th>Nome</th>
           </tr>
         </thead>
-        <tbody id="tbodyInstrumentos">
-          <!-- preenchido via JS -->
-        </tbody>
+        <tbody id="tbodyInstrumentos"></tbody>
       </table>
       
       <div class="section-title">Mídia & Som</div>
@@ -386,15 +607,12 @@
             <th>Responsável</th>
           </tr>
         </thead>
-        <tbody id="tbodyMidiaSom">
-          <!-- preenchido via JS -->
-        </tbody>
+        <tbody id="tbodyMidiaSom"></tbody>
       </table>
       <br>
       <div>
         <div class="week-nav">
           <div class="week-buttons">
-            <!-- mesmos botões, agora só com classes -->
             <button class="nav-btn btn-prev-week" title="Semana anterior">&#x25C0;</button>
             <button class="nav-btn btn-next-week" title="Próxima semana">&#x25B6;</button>
           </div>
@@ -409,7 +627,6 @@
   </main>
 
   <script>
-    // CONFIGURAÇÃO: MÊS FIXO (exemplo: Janeiro/2026) COM SEMANAS
     const mesAtual = {
       nomeMesCurto: "JAN",
       ano: 2026,
@@ -465,10 +682,8 @@
           numero: 2,
           dataLabel: "11/01/2026 · 19h",
           tema: "Carta aos Romanos",
-          repertorio: [
-          ],
-          links: [
-          ],
+          repertorio: [],
+          links: [],
           vozes: [
             { funcao: "Voz ", nome: "Israel" },
             { funcao: "Voz ", nome: "Klélio" },
@@ -490,10 +705,8 @@
           numero: 3,
           dataLabel: "18/01/2026 · 19h",
           tema: "Carta aos Romanos",
-          repertorio: [
-          ],
-          links: [
-          ],
+          repertorio: [],
+          links: [],
           vozes: [
             { funcao: "Voz ", nome: "Israel" },
             { funcao: "Voz ", nome: "Klélio" },
@@ -515,10 +728,8 @@
           numero: 4,
           dataLabel: "25/01/2026 · 18h",
           tema: "Carta aos Romanos",
-          repertorio: [
-          ],
-          links: [
-          ],
+          repertorio: [],
+          links: [],
           vozes: [
             { funcao: "Voz ", nome: "Israel" },
             { funcao: "Voz ", nome: "Klélio" },
@@ -541,7 +752,7 @@
       ]
     };
 
-    let semanaIndex = 0; // 0 = semana 1
+    let semanaIndex = 0;
 
     const monthTag = document.getElementById("monthTag");
     const weekLabels = document.querySelectorAll(".week-label");
@@ -572,14 +783,12 @@
       subtitle.textContent = "Participação da Ingrid em ensaios";
       subtitleEscala.textContent = "Escala de vozes, instrumentos, mídia e som para esta semana.";
 
-      // Limpa tabelas
       tbodyMusicas.innerHTML = "";
       tbodyLinks.innerHTML = "";
       tbodyVozes.innerHTML = "";
       tbodyInstrumentos.innerHTML = "";
       tbodyMidiaSom.innerHTML = "";
 
-      // Músicas
       semana.repertorio.forEach((m, idx) => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -591,7 +800,6 @@
         tbodyMusicas.appendChild(tr);
       });
 
-      // Links
       semana.links.forEach(l => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -603,7 +811,6 @@
         tbodyLinks.appendChild(tr);
       });
 
-      // Vozes
       semana.vozes.forEach(v => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -613,7 +820,6 @@
         tbodyVozes.appendChild(tr);
       });
 
-      // Instrumentos
       semana.instrumentos.forEach(i => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -623,7 +829,6 @@
         tbodyInstrumentos.appendChild(tr);
       });
 
-      // Mídia & Som
       semana.midiaSom.forEach(ms => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
@@ -634,7 +839,6 @@
       });
     }
 
-    // Navegação por TODOS os botões (cima e baixo)
     const btnPrevWeeks = document.querySelectorAll(".btn-prev-week");
     const btnNextWeeks = document.querySelectorAll(".btn-next-week");
 
@@ -660,7 +864,6 @@
       });
     });
 
-    // Navegação pelas setas do teclado ← →
     document.addEventListener("keydown", (ev) => {
       if (ev.key === "ArrowLeft") {
         btnPrevWeeks[0].click();
@@ -669,7 +872,14 @@
       }
     });
 
-    // Inicializa na semana 1
+    // Troca de tema
+    const themeSelect = document.getElementById("themeSelect");
+    themeSelect.addEventListener("change", () => {
+      const tema = themeSelect.value;
+      document.body.classList.remove("tema-cinza", "tema-laranja");
+      document.body.classList.add(tema);
+    });
+
     atualizarSemana();
   </script>
 </body>
