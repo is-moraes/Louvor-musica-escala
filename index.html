@@ -244,6 +244,7 @@
       transform: translateY(0);
       box-shadow: none;
     }
+
     .badge-incidente { background: rgba(52,152,219,0.18); color: #4aa3ff; }
     .badge-requisicao { background: rgba(46,204,113,0.18); color: #6de08d; }
     .badge-outros { background: rgba(241,196,15,0.18); color: #f7d95a; }
@@ -256,7 +257,7 @@
 
     .small-note {
       font-size: 0.75rem;
-      color: #9ca3af;
+      color: #4f5358;
       margin-top: 2px;
     }
 
@@ -283,10 +284,11 @@
         <div>
           <div class="week-nav">
             <div class="week-buttons">
-              <button class="nav-btn" id="btnPrevWeek" title="Semana anterior">&#x25C0;</button>
-              <button class="nav-btn" id="btnNextWeek" title="Próxima semana">&#x25B6;</button>
+              <!-- trocado para classes -->
+              <button class="nav-btn btn-prev-week" title="Semana anterior">&#x25C0;</button>
+              <button class="nav-btn btn-next-week" title="Próxima semana">&#x25B6;</button>
             </div>
-            <div class="week-label" id="weekLabel">SEMANA 1</div>
+            <div class="week-label week-label-main">SEMANA 1</div>
           </div>
           <div class="small-note">Navegue semana a semana do mês (um culto por domingo).</div>
         </div>
@@ -332,10 +334,6 @@
         </tbody>
       </table>
 
-      <!--<p class="history-note">
-        Dica: registre sempre que repetir uma música para ter o histórico do mês e do ano.
-      </p>-->
-
       <div class="footer-note">
         “Romanos 10 fala sobre a justiça que vem da fé em Cristo, mostrando que a salvação é para todo aquele que crê e confessa Jesus como Senhor, sem distinção entre judeus e gentios. Destaca também a importância da pregação do evangelho, porque só pode crer quem ouve a mensagem de Cristo” – Romanos 10
       </div>
@@ -379,7 +377,7 @@
           <!-- preenchido via JS -->
         </tbody>
       </table>
-
+      
       <div class="section-title">Mídia & Som</div>
       <table>
         <thead>
@@ -392,9 +390,19 @@
           <!-- preenchido via JS -->
         </tbody>
       </table>
-
+      <br>
+      <div>
+        <div class="week-nav">
+          <div class="week-buttons">
+            <!-- mesmos botões, agora só com classes -->
+            <button class="nav-btn btn-prev-week" title="Semana anterior">&#x25C0;</button>
+            <button class="nav-btn btn-next-week" title="Próxima semana">&#x25B6;</button>
+          </div>
+          <div class="week-label week-label-side">SEMANA 1</div>
+        </div>
+        <div class="small-note">Navegue semana a semana do mês (um culto por domingo).</div>
+      </div>
       <p class="legend">
-        <!--<span class="pill">S = Substituto</span>-->
         <span class="pill">* Ausencias, ser comunicado com antecedencia </span>
       </p>
     </aside>
@@ -402,7 +410,6 @@
 
   <script>
     // CONFIGURAÇÃO: MÊS FIXO (exemplo: Janeiro/2026) COM SEMANAS
-    // Você pode replicar esse objeto para outro mês (fevereiro, março, etc.)
     const mesAtual = {
       nomeMesCurto: "JAN",
       ano: 2026,
@@ -453,30 +460,14 @@
             { area: "Transmissão", nome: "July" },
             { area: "Operador de som", nome: "-" }
           ]
-        }, ///////////////////////////////////////////// semana 2 //////////////////////////////////////////
+        },
         {
           numero: 2,
           dataLabel: "11/01/2026 · 19h",
           tema: "Carta aos Romanos",
           repertorio: [
-            /*{ nome: "Eu te bendirei", tom: "E", Sequência: "1ª" },
-            { nome: "Brilho Celeste", tom: "E", Sequência: "2ª" },
-            { nome: "Te louvarei", tom: "A", Sequência: "3ª" },
-            { nome: "Restaura a Aliança", tom: "C", Sequência: "Pós Pregação" }*/
           ],
           links: [
-            {
-              /*musica: "Grandes Coisas",
-              canal: "Diante do Trono",
-              url: "https://www.youtube.com/",
-              usadaEm: "Versão Youtube"
-            },
-            {
-              musica: "Em Espírito, em Verdade",
-              canal: "Oficina G3",
-              url: "https://www.youtube.com/",
-              usadaEm: "Versão Youtube"*/
-            }
           ],
           vozes: [
             { funcao: "Voz ", nome: "Israel" },
@@ -494,35 +485,14 @@
             { area: "Transmissão", nome: "July" },
             { area: "Operador de som", nome: "-" }
           ]
-        },///////////////////////////////////////// Semana 3 //////////////////////////////////////
+        },
         {
           numero: 3,
           dataLabel: "18/01/2026 · 19h",
           tema: "Carta aos Romanos",
           repertorio: [
-            /*{ nome: "Eu te bendirei", tom: "E", Sequência: "1ª" },
-            { nome: "Brilho Celeste", tom: "E", Sequência: "2ª" },
-            { nome: "Te louvarei", tom: "A", Sequência: "3ª" },
-            { nome: "Restaura a Aliança", tom: "C", Sequência: "Pós Pregação" }*/
-          ],
-          vozes: [
-            { funcao: "Voz ", nome: "Israel" },
-            { funcao: "Voz ", nome: "Klélio" },
-            { funcao: "Voz ", nome: "Deborah" }
           ],
           links: [
-            {
-              /*musica: "Grandes Coisas",
-              canal: "Diante do Trono",
-              url: "https://www.youtube.com/",
-              usadaEm: "Versão Youtube"
-            },
-            {
-              musica: "Em Espírito, em Verdade",
-              canal: "Oficina G3",
-              url: "https://www.youtube.com/",
-              usadaEm: "Versão Youtube"*/
-            }
           ],
           vozes: [
             { funcao: "Voz ", nome: "Israel" },
@@ -540,35 +510,14 @@
             { area: "Transmissão", nome: "July" },
             { area: "Operador de som", nome: "-" }
           ]
-        },///////////////////////////////////////// Semana 4 ////////////////////////////////////////////
+        },
         {
           numero: 4,
           dataLabel: "25/01/2026 · 18h",
           tema: "Carta aos Romanos",
           repertorio: [
-            /*{ nome: "Eu te bendirei", tom: "E", Sequência: "1ª" },
-            { nome: "Brilho Celeste", tom: "E", Sequência: "2ª" },
-            { nome: "Te louvarei", tom: "A", Sequência: "3ª" },
-            { nome: "Restaura a Aliança", tom: "C", Sequência: "Pós Pregação" }*/
-          ],
-          vozes: [
-            { funcao: "Voz ", nome: "Israel" },
-            { funcao: "Voz ", nome: "Klélio" },
-            { funcao: "Voz ", nome: "Deborah" }
           ],
           links: [
-            {
-              /*musica: "Grandes Coisas",
-              canal: "Diante do Trono",
-              url: "https://www.youtube.com/",
-              usadaEm: "Versão Youtube"
-            },
-            {
-              musica: "Em Espírito, em Verdade",
-              canal: "Oficina G3",
-              url: "https://www.youtube.com/",
-              usadaEm: "Versão Youtube"*/
-            }
           ],
           vozes: [
             { funcao: "Voz ", nome: "Israel" },
@@ -595,7 +544,7 @@
     let semanaIndex = 0; // 0 = semana 1
 
     const monthTag = document.getElementById("monthTag");
-    const weekLabel = document.getElementById("weekLabel");
+    const weekLabels = document.querySelectorAll(".week-label");
     const subtitle = document.getElementById("subtitle");
     const subtitleEscala = document.getElementById("subtitleEscala");
     const chipData = document.getElementById("chipData");
@@ -613,7 +562,9 @@
       if (!semana) return;
 
       monthTag.textContent = `${mesAtual.nomeMesCurto} ${mesAtual.ano}`;
-      weekLabel.textContent = `SEMANA ${semana.numero}`;
+      weekLabels.forEach(label => {
+        label.textContent = `SEMANA ${semana.numero}`;
+      });
       chipData.textContent = `Data: ${semana.dataLabel}`;
       chipTema.textContent = `Tema: ${semana.tema}`;
       chipMinisterio.textContent = `Ministério: ${mesAtual.ministerio}`;
@@ -644,9 +595,9 @@
       semana.links.forEach(l => {
         const tr = document.createElement("tr");
         tr.innerHTML = `
-          <td>${l.musica}</td>
-          <td>${l.canal}</td>
-          <td><a href="${l.url}" target="_blank" rel="noopener">Abrir YouTube</a></td>
+          <td>${l.musica || ""}</td>
+          <td>${l.canal || ""}</td>
+          <td>${l.url ? `<a href="${l.url}" target="_blank" rel="noopener">Abrir YouTube</a>` : ""}</td>
           <td>${l.usadaEm || ""}</td>
         `;
         tbodyLinks.appendChild(tr);
@@ -683,30 +634,38 @@
       });
     }
 
-    document.getElementById("btnPrevWeek").addEventListener("click", () => {
-      if (semanaIndex > 0) {
-        semanaIndex--;
-      } else {
-        semanaIndex = mesAtual.semanas.length - 1; // volta para a última semana
-      }
-      atualizarSemana();
+    // Navegação por TODOS os botões (cima e baixo)
+    const btnPrevWeeks = document.querySelectorAll(".btn-prev-week");
+    const btnNextWeeks = document.querySelectorAll(".btn-next-week");
+
+    btnPrevWeeks.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (semanaIndex > 0) {
+          semanaIndex--;
+        } else {
+          semanaIndex = mesAtual.semanas.length - 1;
+        }
+        atualizarSemana();
+      });
     });
 
-    document.getElementById("btnNextWeek").addEventListener("click", () => {
-      if (semanaIndex < mesAtual.semanas.length - 1) {
-        semanaIndex++;
-      } else {
-        semanaIndex = 0; // volta para a primeira semana
-      }
-      atualizarSemana();
+    btnNextWeeks.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (semanaIndex < mesAtual.semanas.length - 1) {
+          semanaIndex++;
+        } else {
+          semanaIndex = 0;
+        }
+        atualizarSemana();
+      });
     });
 
     // Navegação pelas setas do teclado ← →
     document.addEventListener("keydown", (ev) => {
       if (ev.key === "ArrowLeft") {
-        document.getElementById("btnPrevWeek").click();
+        btnPrevWeeks[0].click();
       } else if (ev.key === "ArrowRight") {
-        document.getElementById("btnNextWeek").click();
+        btnNextWeeks[0].click();
       }
     });
 
