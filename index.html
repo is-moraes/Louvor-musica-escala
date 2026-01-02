@@ -519,13 +519,9 @@
             </div>
             <div class="week-label week-label-main">SEMANA 1</div>
           </div>
-          <div class="small-note">Navegue semana a semana do mês (um culto por domingo).</div>
+          <!--div class="small-note">Navegue semana a semana do mês (um culto por domingo).</div-->
         </div>
       </div>
-
-      <p class="subtitle" id="subtitle">
-        Lista das músicas com tom e Sequência deste domingo.
-      </p>
 
       <div class="info-row">
         <div class="info-chip" id="chipData">Data: 04/01/2026 · 18h</div>
@@ -559,9 +555,9 @@
         <tbody id="tbodyLinks"></tbody>
       </table>
 
-      <div class="footer-note">
-        Versão para vocal terá como referencia a usada no link do Youtube
-      </div>
+      <p class="legend">
+        <span class="pill">Versão para vocal terá como referencia a usada no link do Youtube </span>
+      </p>
     </section>
 
     <!-- DIREITA: ESCALA -->
@@ -572,11 +568,7 @@
           <div class="card-title">Equipe deste Domingo</div>
         </div>
       </div>
-
-      <p class="subtitle" id="subtitleEscala">
-        Quem irá cantar, tocar, cuidar da mídia e operar o som nesta semana.
-      </p>
-
+     
       <div class="section-title">Vozes</div>
       <table>
         <thead>
@@ -618,7 +610,7 @@
           </div>
           <div class="week-label week-label-side">SEMANA 1</div>
         </div>
-        <div class="small-note">Navegue semana a semana do mês (um culto por domingo).</div>
+        <!--div class="small-note">Navegue semana a semana do mês (um culto por domingo).</div-->
       </div>
       <p class="legend">
         <span class="pill">* Ausencias, ser comunicado com antecedencia </span>
@@ -790,8 +782,8 @@
       chipTema.textContent = `Tema: ${semana.tema}`;
       chipMinisterio.textContent = `Ministério: ${mesAtual.ministerio}`;
 
-      subtitle.textContent = "Participação da Ingrid em ensaios";
-      subtitleEscala.textContent = "Escala de vozes, instrumentos, mídia e som para esta semana.";
+      //subtitle.textContent = "Participação da Ingrid em ensaios";
+      //subtitleEscala.textContent = "Escala de vozes, instrumentos, mídia e som para esta semana.";
 
       tbodyMusicas.innerHTML = "";
       tbodyLinks.innerHTML = "";
@@ -895,5 +887,6 @@
   </script>
 </body>
 </html>
+
 
 
