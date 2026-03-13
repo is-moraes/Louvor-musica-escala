@@ -5,10 +5,8 @@
   <title>Repertório de Louvor - Semanas do Mês</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *, *::before, *::after {
+      box-sizing: border-box; margin: 0; padding: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
 
@@ -17,13 +15,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: background 0.4s ease, color 0.4s ease;
     }
 
     .overlay {
       position: fixed;
       inset: 0;
       z-index: 0;
-      transition: background 0.2s ease, backdrop-filter 0.2s ease;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease;
     }
 
     .container {
@@ -37,468 +36,267 @@
       gap: 24px;
     }
 
-    @media (max-width: 900px) {
-      .container {
-        grid-template-columns: 1fr;
-        padding: 16px;
-      }
-    }
+    @media (max-width: 900px) { .container { grid-template-columns: 1fr; padding: 16px; } }
 
     .card {
-      border-radius: 16px;
+      border-radius: 18px;
       padding: 20px 22px;
-      transition: background 0.2s ease, box-shadow 0.2s ease, border 0.2s ease;
+      transition: background 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
     }
 
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      gap: 10px;
-    }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; gap: 10px; }
+    @media (max-width: 600px) { .card-header { flex-direction: column; align-items: flex-start; } }
 
-    @media (max-width: 600px) {
-      .card-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
+    .card-title   { font-size: 1.1rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
+    .card-subtitle{ font-size: 0.8rem;  text-transform: uppercase; letter-spacing: 0.12em; }
+    h1            { font-size: 1.7rem; margin-bottom: 4px; }
+    .subtitle     { font-size: 0.95rem; margin-bottom: 16px; }
 
-    .card-title {
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-    }
+    .info-row  { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 18px; }
+    .info-chip { font-size: 0.8rem; padding: 6px 12px; border-radius: 999px; transition: background 0.3s, border-color 0.3s, color 0.3s; }
 
-    .card-subtitle {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-    }
+    table         { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 0.85rem; }
+    th, td        { padding: 8px 6px; text-align: left; }
+    th            { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; border-bottom: 1px solid; }
+    td            { border-bottom: 1px solid; transition: background 0.2s; }
+    a             { text-decoration: none; font-weight: 500; }
+    a:hover       { text-decoration: underline; }
 
-    h1 {
-      font-size: 1.7rem;
-      margin-bottom: 4px;
-    }
+    .section-title { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; margin-top: 18px; margin-bottom: 6px; font-weight: 600; }
 
-    .subtitle {
-      font-size: 0.95rem;
-      margin-bottom: 16px;
-    }
+    .legend      { font-size: 0.75rem; margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .pill        { display: inline-block; padding: 4px 10px; border-radius: 999px; font-size: 0.7rem; transition: background 0.3s, border-color 0.3s, color 0.3s; }
 
-    .info-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .info-chip {
-      font-size: 0.8rem;
-      padding: 6px 10px;
-      border-radius: 999px;
-    }
-
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 8px;
-      font-size: 0.85rem;
-    }
-
-    th, td {
-      padding: 8px 6px;
-      text-align: left;
-    }
-
-    th {
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-    }
-
-    td {
-      border-bottom-width: 1px;
-      border-bottom-style: solid;
-    }
-
-    a {
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    .section-title {
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-top: 12px;
-      margin-bottom: 4px;
-    }
-
-    .history-note {
-      font-size: 0.72rem;
-      margin-top: 4px;
-    }
-
-    .legend {
-      font-size: 0.75rem;
-      margin-top: 8px;
-    }
-
-    .legend span {
-      display: inline-block;
-      margin-right: 10px;
-    }
-
-    .pill {
-      display: inline-block;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-size: 0.7rem;
-    }
-
-    .footer-note {
-      margin-top: 12px;
-      font-size: 0.75rem;
-      text-align: right;
-    }
-
-    .week-nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 4px;
-      flex-wrap: wrap;
-    }
-
-    .week-label {
-      font-size: 0.9rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .week-buttons {
-      display: flex;
-      gap: 8px;
-    }
+    .week-nav    { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; flex-wrap: wrap; }
+    .week-label  { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+    .week-buttons{ display: flex; gap: 8px; }
 
     .nav-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 999px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 18px;
-      transition: background 0.15s, transform 0.1s, box-shadow 0.15s, border-color 0.15s;
+      width: 32px; height: 32px; border-radius: 999px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px; border: none; outline: none;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
     }
+    .nav-btn:active { transform: scale(0.93); }
 
-    .small-note {
-      font-size: 0.75rem;
-      margin-top: 2px;
-    }
+    .month-tag  { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.14em; margin-top: 2px; display: inline-block; }
+    .small-note { font-size: 0.75rem; margin-top: 2px; }
+    .footer-note{ margin-top: 12px; font-size: 0.75rem; text-align: right; }
 
-    .month-tag {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-    }
-
-    /* ---------- SELETOR DE TEMA ---------- */
+    /* ─── THEME SWITCHER ─────────────────────────────────────────── */
     .theme-switcher {
-      position: absolute;
-      top: 10px;
-      right: 16px;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      position: fixed;
+      top: 14px; right: 16px;
+      z-index: 100;
+      display: flex; align-items: center; gap: 8px;
       font-size: 0.78rem;
     }
-
+    .theme-switcher label { font-size: 0.75rem; letter-spacing: 0.06em; }
     .theme-switcher select {
-      padding: 3px 8px;
-      border-radius: 999px;
-      border: 1px solid rgba(148,163,184,0.6);
-      font-size: 0.78rem;
-      background: rgba(15, 23, 42, 0.9);
-      color: #e5e7eb;
-      cursor: pointer;
+      padding: 5px 12px; border-radius: 999px;
+      font-size: 0.78rem; cursor: pointer;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
     }
 
-    /* ---------- TEMA CINZA (ORIGINAL) ---------- */
-    body.tema-cinza {
-      color: #ffffff;
-      background: #fcfcfc;
-      background-image: url("https://images.unsplash.com/photo-1518895949257-7621c3c786d4?auto=format&fit=crop&w=1600&q=80");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+    /* ═══════════════════════════════════════════════════════════════
+       TEMA 1 — NOITE  (dark navy · gold)
+    ═══════════════════════════════════════════════════════════════ */
+    body.tema-noite {
+      background: #060c18;
+      background-image: url("https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover; background-position: center; background-attachment: fixed;
+      color: #f0ece2;
     }
+    body.tema-noite .overlay {
+      background: linear-gradient(to bottom, rgba(6,12,24,0.62) 0%, rgba(6,12,24,0.9) 100%);
+      backdrop-filter: blur(2px);
+    }
+    body.tema-noite .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65), inset 0 1px 0 rgba(255,255,255,0.06);
+      backdrop-filter: blur(18px) saturate(1.4);
+    }
+    body.tema-noite h1             { color: #f5f0e4; }
+    body.tema-noite .card-title    { color: #d4a853; }
+    body.tema-noite .card-subtitle { color: #6b7994; }
+    body.tema-noite .month-tag     { color: #8a9ab8; }
+    body.tema-noite .info-chip     { background: rgba(212,168,83,0.11); border: 1px solid rgba(212,168,83,0.3); color: #e2c97e; }
+    body.tema-noite th             { color: #4e5f7a; border-bottom-color: rgba(255,255,255,0.07); }
+    body.tema-noite tbody tr:nth-child(even) { background: rgba(255,255,255,0.035); }
+    body.tema-noite tbody tr:nth-child(odd)  { background: transparent; }
+    body.tema-noite tbody tr:hover           { background: rgba(212,168,83,0.09); }
+    body.tema-noite td             { border-bottom-color: rgba(255,255,255,0.048); color: #cbc5b8; }
+    body.tema-noite a              { color: #7eb8f7; }
+    body.tema-noite .section-title { color: #4e5f7a; }
+    body.tema-noite .pill          { border: 1px solid rgba(212,168,83,0.28); color: #c8b06a; background: rgba(212,168,83,0.08); }
+    body.tema-noite .week-label    { color: #8a9ab8; }
+    body.tema-noite .nav-btn       { background: linear-gradient(135deg, #c9a84c, #9d7428); border: 1px solid rgba(212,168,83,0.4); color: #fff8e8; box-shadow: 0 4px 14px rgba(180,130,40,0.35); }
+    body.tema-noite .nav-btn:hover { background: linear-gradient(135deg, #dbbe5e, #b8893a); box-shadow: 0 6px 20px rgba(212,168,83,0.42); transform: translateY(-1px); }
+    body.tema-noite .theme-switcher select { background: rgba(6,12,24,0.9); color: #c8c0b0; border: 1px solid rgba(212,168,83,0.35); }
+    body.tema-noite .theme-switcher label  { color: #8a9ab8; }
 
-    body.tema-cinza .overlay {
-      background: radial-gradient(circle at top, rgba(255,255,255,0.08), transparent 60%),
-                  linear-gradient(to bottom, rgba(245, 245, 247, 0.9), rgba(15,23,42,0.75));
+    /* ═══════════════════════════════════════════════════════════════
+       TEMA 2 — PÚRPURA  (deep violet · lavender · cyan)
+    ═══════════════════════════════════════════════════════════════ */
+    body.tema-purpura {
+      background: #0d0820;
+      background-image: url("https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover; background-position: center; background-attachment: fixed;
+      color: #ede9f6;
+    }
+    body.tema-purpura .overlay {
+      background: linear-gradient(135deg, rgba(13,8,32,0.72), rgba(30,8,62,0.88));
       backdrop-filter: blur(3px);
     }
-
-    body.tema-cinza .card {
-      background: rgba(219, 221, 224, 0.65);
-      border: 1px solid rgba(204, 200, 200, 0.12);
-      box-shadow: 0 24px 60px rgba(15,23,42,0.7);
+    body.tema-purpura .card {
+      background: rgba(255,255,255,0.055);
+      border: 1px solid rgba(196,181,253,0.13);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65), inset 0 1px 0 rgba(196,181,253,0.07);
+      backdrop-filter: blur(18px) saturate(1.3);
     }
+    body.tema-purpura h1             { color: #f0eeff; }
+    body.tema-purpura .card-title    { color: #c4b5fd; }
+    body.tema-purpura .card-subtitle { color: #7c6eb4; }
+    body.tema-purpura .month-tag     { color: #9580c4; }
+    body.tema-purpura .info-chip     { background: rgba(139,92,246,0.14); border: 1px solid rgba(167,139,250,0.28); color: #c4b5fd; }
+    body.tema-purpura th             { color: #6b5fa0; border-bottom-color: rgba(167,139,250,0.12); }
+    body.tema-purpura tbody tr:nth-child(even) { background: rgba(139,92,246,0.06); }
+    body.tema-purpura tbody tr:nth-child(odd)  { background: transparent; }
+    body.tema-purpura tbody tr:hover           { background: rgba(196,181,253,0.1); }
+    body.tema-purpura td             { border-bottom-color: rgba(167,139,250,0.09); color: #d4cff0; }
+    body.tema-purpura a              { color: #67e8f9; }
+    body.tema-purpura .section-title { color: #6b5fa0; }
+    body.tema-purpura .pill          { border: 1px solid rgba(167,139,250,0.28); color: #c4b5fd; background: rgba(139,92,246,0.1); }
+    body.tema-purpura .week-label    { color: #9580c4; }
+    body.tema-purpura .nav-btn       { background: linear-gradient(135deg, #7c3aed, #5b21b6); border: 1px solid rgba(167,139,250,0.35); color: #f0eeff; box-shadow: 0 4px 14px rgba(124,58,237,0.42); }
+    body.tema-purpura .nav-btn:hover { background: linear-gradient(135deg, #8b5cf6, #6d28d9); box-shadow: 0 6px 20px rgba(139,92,246,0.5); transform: translateY(-1px); }
+    body.tema-purpura .theme-switcher select { background: rgba(13,8,32,0.92); color: #d4cff0; border: 1px solid rgba(167,139,250,0.35); }
+    body.tema-purpura .theme-switcher label  { color: #9580c4; }
 
-    body.tema-cinza .card-title {
-      color: #06558a;
+    /* ═══════════════════════════════════════════════════════════════
+       TEMA 3 — FLORESTA  (deep green · amber)
+    ═══════════════════════════════════════════════════════════════ */
+    body.tema-floresta {
+      background: #071410;
+      background-image: url("https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover; background-position: center; background-attachment: fixed;
+      color: #ecf7f1;
     }
-
-    body.tema-cinza .card-subtitle {
-      color: #252629;
+    body.tema-floresta .overlay {
+      background: linear-gradient(to bottom, rgba(7,20,16,0.58), rgba(7,20,16,0.92));
+      backdrop-filter: blur(2px);
     }
-
-    body.tema-cinza h1 {
-      color: #ffffff;
+    body.tema-floresta .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(110,231,183,0.11);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65), inset 0 1px 0 rgba(110,231,183,0.06);
+      backdrop-filter: blur(18px) saturate(1.3);
     }
+    body.tema-floresta h1             { color: #edf7f2; }
+    body.tema-floresta .card-title    { color: #6ee7b7; }
+    body.tema-floresta .card-subtitle { color: #3d7a5c; }
+    body.tema-floresta .month-tag     { color: #4d8c6c; }
+    body.tema-floresta .info-chip     { background: rgba(52,211,153,0.1); border: 1px solid rgba(52,211,153,0.22); color: #a7f3d0; }
+    body.tema-floresta th             { color: #2e6e4e; border-bottom-color: rgba(110,231,183,0.1); }
+    body.tema-floresta tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+    body.tema-floresta tbody tr:nth-child(odd)  { background: transparent; }
+    body.tema-floresta tbody tr:hover           { background: rgba(52,211,153,0.09); }
+    body.tema-floresta td             { border-bottom-color: rgba(110,231,183,0.07); color: #c8eed8; }
+    body.tema-floresta a              { color: #fbbf24; }
+    body.tema-floresta .section-title { color: #2e6e4e; }
+    body.tema-floresta .pill          { border: 1px solid rgba(52,211,153,0.22); color: #a7f3d0; background: rgba(52,211,153,0.08); }
+    body.tema-floresta .week-label    { color: #4d8c6c; }
+    body.tema-floresta .nav-btn       { background: linear-gradient(135deg, #059669, #065f46); border: 1px solid rgba(110,231,183,0.28); color: #ecfdf5; box-shadow: 0 4px 14px rgba(5,150,105,0.4); }
+    body.tema-floresta .nav-btn:hover { background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 6px 20px rgba(16,185,129,0.48); transform: translateY(-1px); }
+    body.tema-floresta .theme-switcher select { background: rgba(7,20,16,0.92); color: #c8eed8; border: 1px solid rgba(52,211,153,0.3); }
+    body.tema-floresta .theme-switcher label  { color: #4d8c6c; }
 
-    body.tema-cinza .subtitle {
-      color: #232427;
+    /* ═══════════════════════════════════════════════════════════════
+       TEMA 4 — CREPÚSCULO  (dark warm · ember orange)
+    ═══════════════════════════════════════════════════════════════ */
+    body.tema-crepusculo {
+      background: #110804;
+      background-image: url("https://images.unsplash.com/photo-1495616811223-4d98c6e9c869?auto=format&fit=crop&w=1600&q=80");
+      background-size: cover; background-position: center; background-attachment: fixed;
+      color: #fef3e8;
     }
-
-    body.tema-cinza .info-chip {
-      background: rgba(15,23,42,0.95);
-      border: 1px solid rgba(148,163,184,0.5);
-      color: #e5e7eb;
+    body.tema-crepusculo .overlay {
+      background: linear-gradient(to bottom, rgba(17,8,4,0.55), rgba(17,8,4,0.9));
+      backdrop-filter: blur(2px);
     }
-
-    body.tema-cinza th {
-      color: #9ca3af;
-      border-bottom-color: rgba(148,163,184,0.4);
+    body.tema-crepusculo .card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(251,146,60,0.14);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.65), inset 0 1px 0 rgba(251,146,60,0.06);
+      backdrop-filter: blur(18px) saturate(1.3);
     }
+    body.tema-crepusculo h1             { color: #fff6ee; }
+    body.tema-crepusculo .card-title    { color: #fb923c; }
+    body.tema-crepusculo .card-subtitle { color: #7a4a28; }
+    body.tema-crepusculo .month-tag     { color: #8a5530; }
+    body.tema-crepusculo .info-chip     { background: rgba(251,146,60,0.1); border: 1px solid rgba(251,146,60,0.24); color: #fed7aa; }
+    body.tema-crepusculo th             { color: #6a3e20; border-bottom-color: rgba(251,146,60,0.1); }
+    body.tema-crepusculo tbody tr:nth-child(even) { background: rgba(255,255,255,0.03); }
+    body.tema-crepusculo tbody tr:nth-child(odd)  { background: transparent; }
+    body.tema-crepusculo tbody tr:hover           { background: rgba(251,146,60,0.09); }
+    body.tema-crepusculo td             { border-bottom-color: rgba(251,146,60,0.07); color: #f0d2b0; }
+    body.tema-crepusculo a              { color: #fde68a; }
+    body.tema-crepusculo .section-title { color: #6a3e20; }
+    body.tema-crepusculo .pill          { border: 1px solid rgba(251,146,60,0.24); color: #fed7aa; background: rgba(251,146,60,0.08); }
+    body.tema-crepusculo .week-label    { color: #8a5530; }
+    body.tema-crepusculo .nav-btn       { background: linear-gradient(135deg, #ea580c, #b45309); border: 1px solid rgba(251,146,60,0.34); color: #fff6ee; box-shadow: 0 4px 14px rgba(234,88,12,0.4); }
+    body.tema-crepusculo .nav-btn:hover { background: linear-gradient(135deg, #f97316, #ea580c); box-shadow: 0 6px 20px rgba(249,115,22,0.48); transform: translateY(-1px); }
+    body.tema-crepusculo .theme-switcher select { background: rgba(17,8,4,0.92); color: #f0d2b0; border: 1px solid rgba(251,146,60,0.3); }
+    body.tema-crepusculo .theme-switcher label  { color: #8a5530; }
 
-    body.tema-cinza tbody tr:nth-child(even) {
-      background: rgba(15,23,42,0.7);
-    }
-
-    body.tema-cinza tbody tr:nth-child(odd) {
-      background: rgba(15,23,42,0.4);
-    }
-
-    body.tema-cinza tbody tr:hover {
-      background: rgba(59,130,246,0.2);
-    }
-
-    body.tema-cinza td {
-      border-bottom-color: rgba(15,23,42,0.8);
-    }
-
-    body.tema-cinza a {
-      color: #93c5fd;
-    }
-
-    body.tema-cinza a:hover {
-      text-decoration: underline;
-    }
-
-    body.tema-cinza .section-title {
-      color: #111113;
-    }
-
-    body.tema-cinza .history-note {
-      color: #9ca3af;
-    }
-
-    body.tema-cinza .legend {
-      color: #9ca3af;
-    }
-
-    body.tema-cinza .pill {
-      border: 1px solid rgba(148,163,184,0.5);
-      color: #e5e7eb;
-      background: rgba(15,23,42,0.9);
-    }
-
-    body.tema-cinza .footer-note {
-      color: #1a5baf;
-    }
-
-    body.tema-cinza .week-label {
-      color: #3c3e42;
-    }
-
-    body.tema-cinza .nav-btn {
-      border: 1px solid rgba(148,163,184,0.6);
-      background: rgba(15, 32, 71, 0.9);
-      color: #e5e7eb;
-    }
-
-    body.tema-cinza .nav-btn:hover {
-      background: rgba(37,99,235,0.9);
-      box-shadow: 0 0 0 1px rgba(191,219,254,0.6);
-      transform: translateY(-1px);
-    }
-
-    body.tema-cinza .small-note {
-      color: #4f5358;
-    }
-
-    body.tema-cinza .month-tag {
-      color: #4a4d52;
-    }
-
-    /* ---------- TEMA BRANCO / LARANJA ---------- */
+    /* ═══════════════════════════════════════════════════════════════
+       TEMA 5 — LARANJA  (clean light · warm orange)
+    ═══════════════════════════════════════════════════════════════ */
     body.tema-laranja {
-      color: #111827;
-      background: #fdfdfb;
+      background: #faf8f5;
+      color: #1c1917;
     }
-
     body.tema-laranja .overlay {
       background:
-        radial-gradient(circle at top, rgba(251, 146, 60, 0.12), transparent 55%),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.96), rgba(249, 250, 251, 1));
-      backdrop-filter: blur(6px);
+        radial-gradient(ellipse at 25% 0%, rgba(251,146,60,0.08), transparent 60%),
+        linear-gradient(to bottom, #ffffff, #faf8f5);
     }
-
-    body.tema-laranja .card {
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
-    }
-
-    body.tema-laranja .card-title {
-      color: #111827;
-    }
-
-    body.tema-laranja .card-subtitle {
-      color: #6b7280;
-    }
-
-    body.tema-laranja h1 {
-      color: #111827;
-    }
-
-    body.tema-laranja .subtitle {
-      color: #6b7280;
-    }
-
-    body.tema-laranja .info-chip {
-      background: #fff7ed;
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-    }
-
-    body.tema-laranja th {
-      color: #9ca3af;
-      border-bottom-color: #e5e7eb;
-      background: #f9fafb;
-    }
-
-    body.tema-laranja tbody tr:nth-child(even) {
-      background: #f9fafb;
-    }
-
-    body.tema-laranja tbody tr:nth-child(odd) {
-      background: #ffffff;
-    }
-
-    body.tema-laranja tbody tr:hover {
-      background: #fff7ed;
-    }
-
-    body.tema-laranja td {
-      border-bottom-color: #f3f4f6;
-      color: #374151;
-    }
-
-    body.tema-laranja a {
-      color: #f97316;
-    }
-
-    body.tema-laranja a:hover {
-      color: #ea580c;
-    }
-
-    body.tema-laranja .section-title {
-      color: #6b7280;
-    }
-
-    body.tema-laranja .history-note {
-      color: #9ca3af;
-    }
-
-    body.tema-laranja .legend {
-      color: #9ca3af;
-    }
-
-    body.tema-laranja .pill {
-      border: 1px solid #fed7aa;
-      color: #9a3412;
-      background: #fff7ed;
-    }
-
-    body.tema-laranja .footer-note {
-      color: #9a3412;
-    }
-
-    body.tema-laranja .week-label {
-      color: #6b7280;
-    }
-
-    body.tema-laranja .nav-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      border: 1px solid #fed7aa;
-      background: linear-gradient(to bottom, #f97316, #ea580c);
-      color: #ffffff;
-      box-shadow: 0 8px 18px rgba(249, 115, 22, 0.35);
-    }
-
-    body.tema-laranja .nav-btn:hover {
-      background: linear-gradient(to bottom, #fb923c, #f97316);
-      box-shadow: 0 0 0 1px rgba(248, 250, 252, 0.8), 0 10px 22px rgba(249, 115, 22, 0.45);
-      transform: translateY(-1px);
-      border-color: #fdba74;
-    }
-
-    body.tema-laranja .nav-btn:active {
-      transform: translateY(0);
-      box-shadow: 0 4px 10px rgba(249, 115, 22, 0.3);
-    }
-
-    body.tema-laranja .small-note {
-      color: #9ca3af;
-    }
-
-    body.tema-laranja .month-tag {
-      color: #9a3412;
-      padding: 3px 9px;
-      border-radius: 999px;
-      border: 1px solid #fed7aa;
-      background: #fffbeb;
-      display: inline-block;
-      margin-top: 4px;
-    }
+    body.tema-laranja .card         { background: #ffffff; border: 1px solid #e7e5e4; box-shadow: 0 4px 24px rgba(28,25,23,0.06), 0 1px 4px rgba(28,25,23,0.04); backdrop-filter: none; }
+    body.tema-laranja h1             { color: #1c1917; }
+    body.tema-laranja .card-title    { color: #1c1917; }
+    body.tema-laranja .card-subtitle { color: #a8a29e; }
+    body.tema-laranja .month-tag     { color: #ea580c; padding: 2px 10px; border-radius: 999px; border: 1px solid #fdba74; background: #fff7ed; }
+    body.tema-laranja .info-chip     { background: #fff7ed; border: 1px solid #fdba74; color: #9a3412; }
+    body.tema-laranja th             { color: #a8a29e; border-bottom-color: #e7e5e4; background: #fafaf9; }
+    body.tema-laranja tbody tr:nth-child(even) { background: #fafaf9; }
+    body.tema-laranja tbody tr:nth-child(odd)  { background: #ffffff; }
+    body.tema-laranja tbody tr:hover           { background: #fff7ed; }
+    body.tema-laranja td             { border-bottom-color: #f5f5f4; color: #44403c; }
+    body.tema-laranja a              { color: #ea580c; }
+    body.tema-laranja a:hover        { color: #c2410c; }
+    body.tema-laranja .section-title { color: #a8a29e; }
+    body.tema-laranja .pill          { border: 1px solid #fdba74; color: #9a3412; background: #fff7ed; }
+    body.tema-laranja .week-label    { color: #78716c; }
+    body.tema-laranja .nav-btn       { background: linear-gradient(135deg, #f97316, #ea580c); border: 1px solid #fdba74; color: #fff; box-shadow: 0 4px 14px rgba(249,115,22,0.32); }
+    body.tema-laranja .nav-btn:hover { background: linear-gradient(135deg, #fb923c, #f97316); box-shadow: 0 6px 20px rgba(249,115,22,0.42); transform: translateY(-1px); }
+    body.tema-laranja .nav-btn:active{ transform: translateY(0); }
+    body.tema-laranja .theme-switcher select { background: #ffffff; color: #1c1917; border: 1px solid #e7e5e4; }
+    body.tema-laranja .theme-switcher label  { color: #78716c; }
   </style>
 </head>
-<body class="tema-cinza">
+<body class="tema-noite">
   <div class="overlay"></div>
 
   <!-- Seletor de tema -->
   <div class="theme-switcher">
-    <span>Tema:</span>
+    <label>Tema</label>
     <select id="themeSelect">
-      <option value="tema-cinza">Cinza</option>
-      <option value="tema-laranja">Branco / Laranja</option>
+      <option value="tema-noite">🌙 Noite</option>
+      <option value="tema-purpura">🔮 Púrpura</option>
+      <option value="tema-floresta">🌿 Floresta</option>
+      <option value="tema-crepusculo">🌅 Crepúsculo</option>
+      <option value="tema-laranja">☀️ Laranja</option>
     </select>
   </div>
 
@@ -509,7 +307,7 @@
         <div>
           <div class="card-subtitle">Domingo · Culto de Celebração</div>
           <h1>Repertório de Louvor</h1>
-          <div class="month-tag" id="monthTag">Marc 2026</div>
+          <div class="month-tag" id="monthTag">Mar 2026</div>
         </div>
         <div>
           <div class="week-nav">
@@ -523,27 +321,15 @@
       </div>
 
       <div class="info-row">
-        <div class="info-chip" id="chipData">Data: 01/02/2026 · 19h</div>
-        <div class="info-chip" id="chipTema">Temas: Novos Louvores:
-        <br>
-          Teu reino
-          <br>
-          Canção de Jonas
-          <br>
-          63 - Ao vivo
-        </div>
-        <div class="info-chip" id="chipMinisterio">Ministério: Min. de Louvor Betel</div>
+        <div class="info-chip" id="chipData">Data: —</div>
+        <div class="info-chip" id="chipTema">Tema: —</div>
+        <div class="info-chip" id="chipMinisterio">Ministério: —</div>
       </div>
 
-      <div class="section-title">Músicas & Tons</div>
+      <div class="section-title">Músicas &amp; Tons</div>
       <table>
         <thead>
-          <tr>
-            <th>#</th>
-            <th>Música</th>
-            <th>Tom</th>
-            <th>Sequência</th>
-          </tr>
+          <tr><th>#</th><th>Música</th><th>Tom</th><th>Sequência</th></tr>
         </thead>
         <tbody id="tbodyMusicas"></tbody>
       </table>
@@ -551,19 +337,13 @@
       <div class="section-title">Versões de Referência (YouTube)</div>
       <table>
         <thead>
-          <tr>
-            <th>Música</th>
-            <th>Por</th>
-            <th>Link</th>
-            <th>Cifras</th>
-          </tr>
+          <tr><th>Música</th><th>Por</th><th>Link</th><th>Cifras</th></tr>
         </thead>
         <tbody id="tbodyLinks"></tbody>
       </table>
 
       <p class="legend">
-        <span class="pill">Versão para vocal terá como referência a usada no link do Youtube</span>
-        <span class="pill">Novas canções a serem adicionadas: <br>Teu reino - DVD Gratidão <br> Canção de Jonas - IPALPHA</span>
+        <span class="pill">Versão para vocal: referência pelo link do YouTube</span>
       </p>
     </section>
 
@@ -575,50 +355,35 @@
           <div class="card-title">Equipe deste Domingo</div>
         </div>
       </div>
-     
+
       <div class="section-title">Vozes</div>
       <table>
-        <thead>
-          <tr>
-            <th>Função</th>
-            <th>Nome</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Função</th><th>Nome</th></tr></thead>
         <tbody id="tbodyVozes"></tbody>
       </table>
 
       <div class="section-title">Instrumentos</div>
       <table>
-        <thead>
-          <tr>
-            <th>Instrumento</th>
-            <th>Nome</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Instrumento</th><th>Nome</th></tr></thead>
         <tbody id="tbodyInstrumentos"></tbody>
       </table>
-      
-      <div class="section-title">Mídia & Som</div>
+
+      <div class="section-title">Mídia &amp; Som</div>
       <table>
-        <thead>
-          <tr>
-            <th>Área</th>
-            <th>Responsável</th>
-          </tr>
-        </thead>
+        <thead><tr><th>Área</th><th>Responsável</th></tr></thead>
         <tbody id="tbodyMidiaSom"></tbody>
       </table>
+
       <br>
-      <div>
-        <div class="week-nav">
-          <div class="week-buttons">
-            <button class="nav-btn btn-prev-week" title="Semana anterior">&#x25C0;</button>
-            <button class="nav-btn btn-next-week" title="Próxima semana">&#x25B6;</button>
-          </div>
-          <div class="week-label week-label-side">SEMANA 1</div>
+      <div class="week-nav">
+        <div class="week-buttons">
+          <button class="nav-btn btn-prev-week" title="Semana anterior">&#x25C0;</button>
+          <button class="nav-btn btn-next-week" title="Próxima semana">&#x25B6;</button>
         </div>
+        <div class="week-label week-label-side">SEMANA 1</div>
       </div>
-      <p class="legend">
+
+      <p class="legend" style="margin-top:12px">
         <span class="pill">* Ausências devem ser comunicadas com antecedência</span>
       </p>
     </aside>
@@ -626,187 +391,118 @@
 
   <script>
     const mesAtual = {
-  "nomeMesCurto": "",
-  "ano": 2026,
-  "ministerio": "",
-  "semanas": [
-    {
-      "numero": 1,
-      "dataLabel": "",
-      "tema": "",
-      "repertorio": [],
-      "links": [],
-      "vozes": [],
-      "instrumentos": [],
-      "midiaSom": []
-    },
-    {
-      "numero": 2,
-      "dataLabel": "",
-      "tema": "",
-      "repertorio": [],
-      "links": [],
-      "vozes": [],
-      "instrumentos": [],
-      "midiaSom": []
-    },
-    {
-      "numero": 3,
-      "dataLabel": "15/03/26 19h",
-      "tema": "",
-      "repertorio": [
+      "nomeMesCurto": "Mar",
+      "ano": 2026,
+      "ministerio": "Min. de Louvor Betel",
+      "semanas": [
         {
-          "nome": "Jesus em Tua presença",
-          "tom": "E",
-          "Sequência": "EBD"
+          "numero": 1,
+          "dataLabel": "",
+          "tema": "",
+          "repertorio": [],
+          "links": [],
+          "vozes": [],
+          "instrumentos": [],
+          "midiaSom": []
         },
         {
-          "nome": "Corpo e Familia",
-          "tom": "C",
-          "Sequência": "1ª"
+          "numero": 2,
+          "dataLabel": "",
+          "tema": "",
+          "repertorio": [],
+          "links": [],
+          "vozes": [],
+          "instrumentos": [],
+          "midiaSom": []
         },
         {
-          "nome": "Eu me alegro em Ti",
-          "tom": "Bb",
-          "Sequência": "2ª"
+          "numero": 3,
+          "dataLabel": "15/03/26 · 19h",
+          "tema": "",
+          "repertorio": [
+            { "nome": "Jesus em Tua presença", "tom": "E",  "Sequência": "EBD"         },
+            { "nome": "Corpo e Família",        "tom": "C",  "Sequência": "1ª"          },
+            { "nome": "Eu me alegro em Ti",     "tom": "Bb", "Sequência": "2ª"          },
+            { "nome": "Jesus, Filho de Deus",   "tom": "A",  "Sequência": "Pós Palavra" }
+          ],
+          "links": [
+            { "musica": "Jesus em Tua presença", "canal": "4/1",         "url": "https://www.youtube.com/watch?v=vjGpTmT32X0&list=RDvjGpTmT32X0&start_radio=1",  "url2": "https://docs.google.com/document/d/1TynjT4kfsZBgDowAlIddjwYEPx7Bnpm22y4PdkLYAAk/edit?tab=t.0#heading=h.bwf6rcwvy4m5" },
+            { "musica": "Corpo e Família",        "canal": "Louvor A.",   "url": "https://www.youtube.com/watch?v=Svwlaow-IVM&list=RDSvwlaow-IVM&start_radio=1",    "url2": "https://docs.google.com/document/d/1a4UQuSkdujE9iRYOXSXsUKwehvDU1bm8T2H1-sq-YYA/edit?tab=t.0" },
+            { "musica": "Eu me alegro em Ti",     "canal": "Min. Shalon", "url": "https://www.youtube.com/watch?v=b1d6C681f4Y&list=RDb1d6C681f4Y&start_radio=1",    "url2": "https://docs.google.com/document/d/1UxH3rRXEK-Xn0Ntqa_4aJd7sTsm3AqMg7bF5PZoqOiE/edit?tab=t.0" },
+            { "musica": "Jesus, Filho de Deus",   "canal": "Fernandinho", "url": "https://www.youtube.com/watch?v=_G_xbDaSDEQ&list=RD_G_xbDaSDEQ&start_radio=1",   "url2": "https://docs.google.com/document/d/1bCR7yVwexYyayxm4_AS4A6hQfbU4lXc-U4mf5mWtlcU/edit?tab=t.0#heading=h.sx805vmf8be4" }
+          ],
+          "vozes": [
+            { "funcao": "Voz", "nome": "Klélio" },
+            { "funcao": "Voz", "nome": "Israel" },
+            { "funcao": "Voz", "nome": "Lu"     }
+          ],
+          "instrumentos": [
+            { "instrumento": "Bateria",      "nome": "Ytalo"   },
+            { "instrumento": "Teclado",      "nome": "Paulinha"},
+            { "instrumento": "Baixo",        "nome": "Samuel"  },
+            { "instrumento": "Violão/Guita", "nome": "Israel"  }
+          ],
+          "midiaSom": [
+            { "area": "Multimídia", "nome": "Nicole" }
+          ]
         },
         {
-          "nome": "Jesus, Filho de Deus",
-          "tom": "A",
-          "Sequência": "Pós Palavra"
-        }
-      ],
-      "links": [
-        {
-          "musica": "Jesus em Tua presença",
-          "canal": "4/1",
-          "url": "https://www.youtube.com/watch?v=vjGpTmT32X0&list=RDvjGpTmT32X0&start_radio=1",
-          "url2": "https://docs.google.com/document/d/1TynjT4kfsZBgDowAlIddjwYEPx7Bnpm22y4PdkLYAAk/edit?tab=t.0#heading=h.bwf6rcwvy4m5"
+          "numero": 4,
+          "dataLabel": "",
+          "tema": "",
+          "repertorio": [],
+          "links": [],
+          "vozes": [],
+          "instrumentos": [],
+          "midiaSom": []
         },
         {
-          "musica": "Corpo e Familia",
-          "canal": "Louvor A.",
-          "url": "https://www.youtube.com/watch?v=Svwlaow-IVM&list=RDSvwlaow-IVM&start_radio=1",
-          "url2": "https://docs.google.com/document/d/1a4UQuSkdujE9iRYOXSXsUKwehvDU1bm8T2H1-sq-YYA/edit?tab=t.0"
-        },
-        {
-          "musica": "Eu me alegro em Ti",
-          "canal": "MIn. Shalon",
-          "url": "https://www.youtube.com/watch?v=b1d6C681f4Y&list=RDb1d6C681f4Y&start_radio=1",
-          "url2": "https://docs.google.com/document/d/1UxH3rRXEK-Xn0Ntqa_4aJd7sTsm3AqMg7bF5PZoqOiE/edit?tab=t.0"
-        },
-        {
-          "musica": "Jesus Filho de Deus",
-          "canal": "Fernandinho",
-          "url": "https://www.youtube.com/watch?v=_G_xbDaSDEQ&list=RD_G_xbDaSDEQ&start_radio=1",
-          "url2": "https://docs.google.com/document/d/1bCR7yVwexYyayxm4_AS4A6hQfbU4lXc-U4mf5mWtlcU/edit?tab=t.0#heading=h.sx805vmf8be4"
-        }
-      ],
-      "vozes": [
-        {
-          "funcao": "Voz",
-          "nome": "Klerio"
-        },
-        {
-          "funcao": "Voz",
-          "nome": "Israel"
-        },
-        {
-          "funcao": "Voz",
-          "nome": "Lu"
-        }
-      ],
-      "instrumentos": [
-        {
-          "instrumento": "Bateria",
-          "nome": "Ytalo"
-        },
-        {
-          "instrumento": "Teclado",
-          "nome": "Paulinha"
-        },
-        {
-          "instrumento": "Baixo",
-          "nome": "Samuel"
-        },
-        {
-          "instrumento": "Violão/Guita",
-          "nome": "Israel"
-        }
-      ],
-      "midiaSom": [
-        {
-          "area": "Multimidia",
-          "nome": "Nicole"
+          "numero": 5,
+          "dataLabel": "",
+          "tema": "",
+          "repertorio": [],
+          "links": [],
+          "vozes": [],
+          "instrumentos": [],
+          "midiaSom": []
         }
       ]
-    },
-    {
-      "numero": 4,
-      "dataLabel": "",
-      "tema": "",
-      "repertorio": [],
-      "links": [],
-      "vozes": [],
-      "instrumentos": [],
-      "midiaSom": []
-    },
-    {
-      "numero": 5,
-      "dataLabel": "",
-      "tema": "",
-      "repertorio": [],
-      "links": [],
-      "vozes": [],
-      "instrumentos": [],
-      "midiaSom": []
-    }
-  ]
-};
+    };
 
+    // ─── State ──────────────────────────────────────────────────────────────
     let semanaIndex = 0;
 
-    const monthTag = document.getElementById("monthTag");
-    const weekLabels = document.querySelectorAll(".week-label");
-    const chipData = document.getElementById("chipData");
-    const chipTema = document.getElementById("chipTema");
+    const monthTag       = document.getElementById("monthTag");
+    const weekLabels     = document.querySelectorAll(".week-label");
+    const chipData       = document.getElementById("chipData");
+    const chipTema       = document.getElementById("chipTema");
     const chipMinisterio = document.getElementById("chipMinisterio");
-
-    const tbodyMusicas = document.getElementById("tbodyMusicas");
-    const tbodyLinks = document.getElementById("tbodyLinks");
-    const tbodyVozes = document.getElementById("tbodyVozes");
+    const tbodyMusicas   = document.getElementById("tbodyMusicas");
+    const tbodyLinks     = document.getElementById("tbodyLinks");
+    const tbodyVozes     = document.getElementById("tbodyVozes");
     const tbodyInstrumentos = document.getElementById("tbodyInstrumentos");
-    const tbodyMidiaSom = document.getElementById("tbodyMidiaSom");
+    const tbodyMidiaSom  = document.getElementById("tbodyMidiaSom");
 
+    // ─── Render ─────────────────────────────────────────────────────────────
     function atualizarSemana() {
       const semana = mesAtual.semanas[semanaIndex];
       if (!semana) return;
 
-      monthTag.textContent = `${mesAtual.nomeMesCurto} ${mesAtual.ano}`;
-      weekLabels.forEach(label => {
-        label.textContent = `SEMANA ${semana.numero}`;
-      });
-
-      chipData.textContent = `Data: ${semana.dataLabel}`;
-      if (chipTema) {
-        chipTema.textContent = `Tema: ${semana.tema || ""}`;
-      }
-      chipMinisterio.textContent = `Ministério: ${mesAtual.ministerio}`;
+      monthTag.textContent     = `${mesAtual.nomeMesCurto} ${mesAtual.ano}`;
+      weekLabels.forEach(l => l.textContent = `SEMANA ${semana.numero}`);
+      chipData.textContent     = semana.dataLabel ? `Data: ${semana.dataLabel}` : "Data: —";
+      chipTema.textContent     = semana.tema       ? `Tema: ${semana.tema}`      : "Tema: —";
+      chipMinisterio.textContent = mesAtual.ministerio ? `Ministério: ${mesAtual.ministerio}` : "Ministério: —";
 
       tbodyMusicas.innerHTML = "";
-      tbodyLinks.innerHTML = "";
-      tbodyVozes.innerHTML = "";
+      tbodyLinks.innerHTML   = "";
+      tbodyVozes.innerHTML   = "";
       tbodyInstrumentos.innerHTML = "";
       tbodyMidiaSom.innerHTML = "";
 
       semana.repertorio.forEach((m, idx) => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${idx + 1}</td>
-          <td>${m.nome}</td>
-          <td>${m.tom}</td>
-          <td>${m.Sequência}</td>
-        `;
+        tr.innerHTML = `<td>${idx + 1}</td><td>${m.nome}</td><td>${m.tom}</td><td>${m.Sequência}</td>`;
         tbodyMusicas.appendChild(tr);
       });
 
@@ -814,87 +510,68 @@
         const tr = document.createElement("tr");
         tr.innerHTML = `
           <td>${l.musica || ""}</td>
-          <td>${l.canal || ""}</td>
-          <td>${l.url ? `<a href="${l.url}" target="_blank" rel="noopener">YouTube</a>` : ""}</td>
-          <td>${l.url2 ? `<a href="${l.url2}" target="_blank" rel="noopener">Cifras</a>` : ""}</td>
-        `;
+          <td>${l.canal  || ""}</td>
+          <td>${l.url  ? `<a href="${l.url}"  target="_blank" rel="noopener">YouTube</a>` : "—"}</td>
+          <td>${l.url2 ? `<a href="${l.url2}" target="_blank" rel="noopener">Cifras</a>`  : "—"}</td>`;
         tbodyLinks.appendChild(tr);
       });
 
       semana.vozes.forEach(v => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${v.funcao}</td>
-          <td>${v.nome}</td>
-        `;
+        tr.innerHTML = `<td>${v.funcao}</td><td>${v.nome}</td>`;
         tbodyVozes.appendChild(tr);
       });
 
       semana.instrumentos.forEach(i => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${i.instrumento}</td>
-          <td>${i.nome}</td>
-        `;
+        tr.innerHTML = `<td>${i.instrumento}</td><td>${i.nome}</td>`;
         tbodyInstrumentos.appendChild(tr);
       });
 
       semana.midiaSom.forEach(ms => {
         const tr = document.createElement("tr");
-        tr.innerHTML = `
-          <td>${ms.area}</td>
-          <td>${ms.nome}</td>
-        `;
+        tr.innerHTML = `<td>${ms.area}</td><td>${ms.nome}</td>`;
         tbodyMidiaSom.appendChild(tr);
       });
     }
 
-    const btnPrevWeeks = document.querySelectorAll(".btn-prev-week");
-    const btnNextWeeks = document.querySelectorAll(".btn-next-week");
+    // ─── Navegação ──────────────────────────────────────────────────────────
+    function navPrev() {
+      semanaIndex = semanaIndex > 0 ? semanaIndex - 1 : mesAtual.semanas.length - 1;
+      atualizarSemana();
+    }
+    function navNext() {
+      semanaIndex = semanaIndex < mesAtual.semanas.length - 1 ? semanaIndex + 1 : 0;
+      atualizarSemana();
+    }
 
-    btnPrevWeeks.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (semanaIndex > 0) {
-          semanaIndex--;
-        } else {
-          semanaIndex = mesAtual.semanas.length - 1;
-        }
-        atualizarSemana();
-      });
+    document.querySelectorAll(".btn-prev-week").forEach(b => b.addEventListener("click", navPrev));
+    document.querySelectorAll(".btn-next-week").forEach(b => b.addEventListener("click", navNext));
+
+    document.addEventListener("keydown", ev => {
+      if (ev.key === "ArrowLeft")  navPrev();
+      if (ev.key === "ArrowRight") navNext();
     });
 
-    btnNextWeeks.forEach(btn => {
-      btn.addEventListener("click", () => {
-        if (semanaIndex < mesAtual.semanas.length - 1) {
-          semanaIndex++;
-        } else {
-          semanaIndex = 0;
-        }
-        atualizarSemana();
-      });
-    });
-
-    document.addEventListener("keydown", (ev) => {
-      if (ev.key === "ArrowLeft") {
-        btnPrevWeeks[0].click();
-      } else if (ev.key === "ArrowRight") {
-        btnNextWeeks[0].click();
-      }
-    });
-
-    // Troca de tema
+    // ─── Tema (persiste no localStorage) ────────────────────────────────────
+    const THEME_KEY  = "louvorTema";
+    const allThemes  = ["tema-noite","tema-purpura","tema-floresta","tema-crepusculo","tema-laranja"];
     const themeSelect = document.getElementById("themeSelect");
-    themeSelect.addEventListener("change", () => {
-      const tema = themeSelect.value;
-      document.body.classList.remove("tema-cinza", "tema-laranja");
-      document.body.classList.add(tema);
-    });
 
+    function aplicarTema(tema) {
+      document.body.classList.remove(...allThemes);
+      document.body.classList.add(tema);
+      themeSelect.value = tema;
+      localStorage.setItem(THEME_KEY, tema);
+    }
+
+    themeSelect.addEventListener("change", () => aplicarTema(themeSelect.value));
+
+    const temaSalvo = localStorage.getItem(THEME_KEY);
+    if (temaSalvo && allThemes.includes(temaSalvo)) aplicarTema(temaSalvo);
+
+    // ─── Init ────────────────────────────────────────────────────────────────
     atualizarSemana();
   </script>
 </body>
 </html>
-
-
-
-
